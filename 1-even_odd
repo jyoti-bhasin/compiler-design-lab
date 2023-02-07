@@ -1,0 +1,26 @@
+%{
+#include<stdio.h>
+#include<string.h>
+int n=0;
+%}
+%%
+[0-9]+  {n=atoi(yytext);
+        if(n%2==0)
+	printf("\neven");
+	else
+	printf("\nodd");}
+	
+
+.*	{ printf("\ninvalid"); }
+%%
+
+int yywrap()
+{}
+
+int main()
+{
+   
+    yylex();
+    return 0;
+}
+
