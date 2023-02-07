@@ -29,3 +29,37 @@ int main()
     return 0;
 }
 
+%{
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+float n=0;
+%}
+%%
+
+[0,1]   { printf("\nperfect number");}
+[0-9]+  {n=atof(yytext);
+        for(int i=0;i<n/2;i++)
+        if(i * i == n){
+	printf("\nperfect square");
+	return 1;
+	}
+	else{
+	printf("\nnot perfect square");
+	return 1;} }
+	
+
+.*	{ printf("\ninvalid"); }
+%%
+
+int yywrap()
+{
+return 1;}
+
+int main()
+{
+   
+    yylex();
+    return 0;
+}
+
