@@ -1,0 +1,17 @@
+%{
+#include<stdio.h>
+int k=0;
+%}
+%%
+if|int|float|char|while|do|for|else|double|switch {printf("Keyword\n");}
+. { printf("Not keyword\n"); }
+%%
+int yywrap()
+{
+return 1;
+}
+int main()
+{
+yylex();
+return 0;
+}
