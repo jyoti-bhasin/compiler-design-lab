@@ -1,0 +1,24 @@
+%{
+#include<stdio.h>
+#define A 1
+#define B 0
+int k=0;
+%}
+%%
+==|!=|<|>|<=|>= { return A; }
+.* {return B;}
+%%
+int yywrap()
+{
+return 1;
+}
+int main()
+{
+printf("Enter a character\n");
+int num= yylex();
+if(num==A)
+printf("Relational operator\n");
+else if(num==B)
+printf("Not Relational operator\n"); 
+return 0;
+}
