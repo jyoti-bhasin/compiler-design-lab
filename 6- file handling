@@ -1,0 +1,25 @@
+%{
+#include<stdio.h>
+int l=0, chars=0, w=0,sp=0;
+%}
+%%
+\n { l++; }
+[a-zA-Z0-9] { chars++; }
+[ |\t] { sp++; }
+%%
+int yywrap()
+{
+return 1;
+}
+int main()
+{
+extern FILE *yyin, *yyout;
+yyin=fopen("input.txt","r");
+yyout=fopen("output.txt","w");
+yylex();
+fprintf(yyout, "\nNo of lines= %d\n", l);
+fprintf(yyout, "\nNo of characters= %d\n", chars);
+fprintf(yyout, "\nNo of words= %d\n", (sp+1));
+fprintf(yyout, "\nNo of spaces= %d\n", sp);
+return 0;
+}
